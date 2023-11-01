@@ -3,7 +3,8 @@
 Map::Map()
 {
 	ResourceManager manage;
-	this->texture = manage.LoadFromFile("res/textures/map_8x8.png", 1);
+	this->map = manage.LoadFromFile("res/textures/map_8x8.png", 1);
+	this->effects = manage.LoadFromFile("res/textures/map_16x16.png", 1);
 
 	texCoord[0] = 0;
 	texCoord[1] = 1;
@@ -16,6 +17,18 @@ Map::Map()
 
 	texCoord[6] = 0;
 	texCoord[7] = 0.9;
+
+	texCoord2[0] = 0;
+	texCoord2[1] = 0.4;
+			
+	texCoord2[2] = 0.15;
+	texCoord2[3] = 0.4;
+			
+	texCoord2[4] = 0.15;
+	texCoord2[5] = 0.2;
+			
+	texCoord2[6] = 0;
+	texCoord2[7] = 0.2;
 }
 
 Map::~Map()
@@ -25,6 +38,19 @@ Map::~Map()
 
 void Map::render(float vertex[])
 {
+	float effects[] = {
+		0,1,
+		0.12,1,
+		0.12,0.8,
+		0,0.8
+	};
+	float effects2[] = {
+		0.5,0.7,
+		0.62,0.7,
+		0.62,0.5,
+		0.5,0.5
+	};
+
 	glPushMatrix();
 	glScalef(0.2, 0.3, 1);
 	glEnable(GL_TEXTURE_2D);
@@ -79,7 +105,7 @@ void Map::render(float vertex[])
 			}
 
 
-			glBindTexture(GL_TEXTURE_2D, this->texture);
+			glBindTexture(GL_TEXTURE_2D, this->map);
 			glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 			glPopMatrix();
 		}
@@ -215,6 +241,82 @@ void Map::render(float vertex[])
 			glPopMatrix();
 		
 	}
+
+	glPushMatrix();
+	glScalef(1.2, 1, 1);
+	glBindTexture(GL_TEXTURE_2D, this->effects);
+	glTexCoordPointer(2, GL_FLOAT, 0, &effects2);
+	glTranslatef(-4.1, -0.5, 0);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	glPopMatrix();
+
+	glPushMatrix();
+	glScalef(1.2, 1, 1);
+	glBindTexture(GL_TEXTURE_2D, this->effects);
+	glTexCoordPointer(2, GL_FLOAT, 0, &effects2);
+	glTranslatef(-0.23 , 1, 0);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	glPopMatrix();
+
+	glPushMatrix();
+	glScalef(1.2, 1, 1);
+	glBindTexture(GL_TEXTURE_2D, this->effects);
+	glTexCoordPointer(2, GL_FLOAT, 0, &effects2);
+	glTranslatef(3.6, -0.5, 0);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	glPopMatrix();
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			glPushMatrix();
+			glScalef(0.8, 0.6, 1);
+			glBindTexture(GL_TEXTURE_2D, this->map);
+			glTexCoordPointer(2, GL_FLOAT, 0, &texCoord2);
+
+			if (j == 0 && i == 1)
+			{
+				glTranslatef(-5.8, -1, 0);
+			}
+			else  if (j == 0)
+			{
+				glTranslatef(-6.3, -1, 0);
+			}
+
+			if (j == 1 && i == 1)
+			{
+				glTranslatef(5.8, -1, 0);
+			}
+			else if (j == 1)
+			{
+				glTranslatef(5.3, -1, 0);
+			}
+
+			if (j == 2 && i == 1)
+			{		
+				glScalef(1.25, 1.25, 1);
+				glTranslatef(-0.5, 1, 0);		
+			}
+			else if (j == 2)
+			{
+				glScalef(1.25, 1.25, 1);
+				glTranslatef(0, 1, 0);
+			}
+
+			glDrawArrays(GL_TRIANGLE_FAN,0,4);
+			glPopMatrix();
+		}
+	}
+
+	glPushMatrix();
+	glScalef(1.3, 0.9, 1);
+	glBindTexture(GL_TEXTURE_2D, this->effects);
+	glTexCoordPointer(2, GL_FLOAT, 0, &effects);
+	glTranslatef(-0.5, -3.7, 0);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	glPopMatrix();
+
 
 
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);

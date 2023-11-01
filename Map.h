@@ -6,8 +6,10 @@
 class Map
 {
 public:
-	unsigned int texture;
+	unsigned int map;
+	unsigned int effects;
 	float texCoord[8];
+	float texCoord2[8];
 
 	Map();
 	~Map();
