@@ -1,4 +1,5 @@
 #include"Map.h"
+#include"Player.h"
 #include<iostream>
 
 int g_windowSizeX = 640;
@@ -35,10 +36,15 @@ int main(void)
 
     float texCoord[] =
     {
-        0,1,1,1,1,0,0,0
+        0,1,
+        0.0625,1,
+        0.0625,0.9375,
+        0,0.9375
     };
 
+
     Map map;
+    Player player;
 
 
     while (!glfwWindowShouldClose(window))
@@ -47,6 +53,8 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
     
         map.render(trianlgr);
+        player.render(trianlgr,window);
+     
         glfwSwapBuffers(window);
 
         glfwPollEvents();
