@@ -6,6 +6,8 @@
 class Player
 {
 public:
+	float x, y;
+	int sideToMove;
 	double currentSide;
 	unsigned int tankTex;
 	float texCoord[8];
@@ -16,7 +18,7 @@ public:
 	~Player();
 
 	void render(float vertex[],GLFWwindow* window);
-	void Move(GLFWwindow* window);
+	void Move(GLFWwindow* window,bool isCan);
 	void animations(GLFWwindow* window);
 };
 

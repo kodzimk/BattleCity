@@ -23,6 +23,9 @@ Player::Player()
 	texCoord[7] = 0.9375;
 
 	this->currentSide = 0.0;
+	this->sideToMove = 0;
+	this->x = 0.f;
+	this->y = 0.f;
 }
 
 Player::~Player()
@@ -33,7 +36,7 @@ void Player::render(float vertex[],GLFWwindow* window)
 {
 
 	glPushMatrix();
-	this->Move(window);
+	this->Move(window,true);
 	this->animations(window);
 
 	glScalef(0.3, 0.3, 1);
@@ -50,9 +53,14 @@ void Player::render(float vertex[],GLFWwindow* window)
 	glPopMatrix();
 }
 
-void Player::Move(GLFWwindow* window)
+void Player::Move(GLFWwindow* window,bool isCan)
 {
-	
+	if (glfwGetKey(window,GLFW_KEY_W)>0&& sideToMove == 0&&isCan)
+	{
+		y += 0.01;
+	}
+
+	glTranslatef(y, x, 0);
 }
 
 void Player::animations(GLFWwindow* window)
@@ -74,7 +82,6 @@ void Player::animations(GLFWwindow* window)
 
 			texCoord[6] = 0;
 			texCoord[7] = 0.9375;
-
 
 		}
 
@@ -127,8 +134,6 @@ void Player::animations(GLFWwindow* window)
 		}
 		return;
 	}
-
-
 	if (glfwGetKey(window, GLFW_KEY_LEFT) > 0)
 	{
 		currentSide += 0.004;
