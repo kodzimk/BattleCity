@@ -17,7 +17,7 @@ public:
 	Enemy();
 	~Enemy();
 
-	void render(GLFWwindow*window, float vertex[], bool isCan);
+	void render(GLFWwindow*window, float vertex[], bool isCan,bool isDie);
 	void move(bool isCan);
 	void animations(GLFWwindow* window, bool icCan);
 };

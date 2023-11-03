@@ -6,6 +6,10 @@
 class Player
 {
 public:
+	bool isShoot;
+	float bullX, bullY;
+	int sideToShoot;
+	int bulletCnt;
 	float x, y;
 	int sideToMove;
 	double currentSide;
@@ -20,6 +24,7 @@ public:
 	void render(float vertex[],GLFWwindow* window,bool isCan);
 	void Move(GLFWwindow* window,bool isCan);
 	void animations(GLFWwindow* window);
+	const bool isEnemyCollide(float x, float y, float width, float height);
 };
 
 #endif

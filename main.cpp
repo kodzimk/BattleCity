@@ -6,37 +6,49 @@
 int g_windowSizeX = 640;
 int g_windowSizeY = 480;
 
-struct posi {
-    float x, y;
-}pos = { 0.5,0.5 };
-
-
-bool functions(float x, float y, float width, float height,float x2,float y2,float width2,float height2)
+class posw
 {
-    posi box1right;
-    box1right.x = x;
-    box1right.y = y;
-    posi box1left;
-     box1left.x = x + width;
-     box1left.y = y + height ;
-
-     posi box2left;
-     posi box2right;
-     box2right.x = x2;
-     box2right.y = y2;
-    box2left.x = x2 + width2;
-    box2left.y = y2 + height2;
-
-    if (box2right.x <= box1left.x &&
-        box2left.x >= box1right.x &&
-        box2right.y <= box1left.y &&
-        box2left.y >= box1right.y)
+public:
+    float x, y;
+    posw()
     {
-        std::cout << "nIGER";
-        return false;
+
     }
-    return true;
+};
+
+ bool isEnemyCollide(float x, float y,float bullX,float bullY, float width, float height,bool isShoot)
+{
+    if (isShoot)
+    {
+        posw box1right;
+        posw box1Left;
+
+        posw box2right;
+        posw box2Left;
+
+        box1right.x = x;
+        box1right.y = y;
+
+        box1Left.x = x + width;
+        box1Left.y = y + height;
+
+        box2right.x = bullX;
+        box2right.y = bullY;
+
+        box2Left.x = width + bullX;
+        box2Left.y = height + bullY;
+
+        if (box2right.x <= box1Left.x &&
+            box2Left.x >= box1right.x &&
+            box2right.y <= box1Left.y &&
+            box2Left.y >= box1right.y)
+        {
+            return false;
+        }
+    }
+    return false;
 }
+
 
 int main(void)
 {
@@ -87,10 +99,14 @@ int main(void)
 
 
         map.render(trianlgr);
-        enemy.render(window, trianlgr, map.checkCollision(-enemy.x, -enemy.y, 0.1, 0.1, 0.1, 0.1));
-        player.render(trianlgr, window, map.checkCollision(-player.x, -player.y, 0.1, 0.1, 0.1, 0.1));
+      
+        
+            enemy.render(window, trianlgr, map.checkCollision(-enemy.x, -enemy.y, 0.1, 0.1, 0.1, 0.1),
+             isEnemyCollide(enemy.x, enemy.y, player.bullX, player.bullY, 0.1, 0.1, player.isShoot));
 
         
+        player.render(trianlgr, window, map.checkCollision(-player.x, -player.y, 0.1, 0.1, 0.1, 0.1));
+
      
         glfwSwapBuffers(window);
 
@@ -100,3 +116,31 @@ int main(void)
     glfwTerminate();
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

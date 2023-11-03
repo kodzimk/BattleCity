@@ -25,7 +25,12 @@ Player::Player()
 	this->currentSide = 0.0;
 	this->sideToMove = 0;
 	this->x = -0.17f;
+	this->bulletCnt = 0;
 	this->y = 0.1f;
+	this->sideToShoot = 0;
+	this->isShoot = false;
+	this->bullX = x;
+	this->bullY = y;
 }
 
 Player::~Player()
@@ -69,6 +74,36 @@ void Player::Move(GLFWwindow* window,bool isCan)
 	else if (glfwGetKey(window, GLFW_KEY_D) > 0 && sideToMove == 3&& isCan)
 	{
 			x -= 0.0002;
+	}
+
+	int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+
+	if (state == 1)
+	{
+		sideToShoot = sideToMove;
+		this->isShoot = true;
+		this->bullX = -x;
+		this->bullY = -y;
+	}
+
+	if (isShoot)
+	{
+		if (sideToShoot == 0)
+		{
+			this->bullY += 0.02;
+		}
+		if (sideToShoot == 2)
+		{
+			this->bullY -= 0.02;
+		}
+		if (sideToShoot == 1)
+		{
+			this->bullX-= 0.02;
+		}
+		if (sideToShoot == 3)
+		{
+			this->bullX += 0.02;
+		}
 	}
 
 	if (!isCan)
@@ -242,3 +277,32 @@ void Player::animations(GLFWwindow* window)
 		return;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

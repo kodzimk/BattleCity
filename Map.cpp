@@ -343,11 +343,6 @@ void Map::render(float vertex[])
 	glBindTexture(GL_TEXTURE_2D, this->effects);
 	glTexCoordPointer(2, GL_FLOAT, 0, &effects2);
 	glTranslatef(-0.95, -0.2, 0);
-	if (counts < 90)
-	{
-		counts++;
-		this->positions.push_back(new pos(-0.95, -0.2, 0.1, 0.1));
-	}
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	glPopMatrix();
 
@@ -355,11 +350,6 @@ void Map::render(float vertex[])
 	glBindTexture(GL_TEXTURE_2D, this->effects);
 	glTexCoordPointer(2, GL_FLOAT, 0, &effects2);
 	glTranslatef(0.85 , -0.2, 0);
-	if (counts < 90)
-	{
-		counts++;
-		this->positions.push_back(new pos(0.85, -0.2, 0.1, 0.1));
-	}
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	glPopMatrix();
 
@@ -367,11 +357,7 @@ void Map::render(float vertex[])
 	glBindTexture(GL_TEXTURE_2D, this->effects);
 	glTexCoordPointer(2, GL_FLOAT, 0, &effects2);
 	glTranslatef(0, 0.3, 0);
-	if (counts < 90)
-	{
-		counts++;
-		this->positions.push_back(new pos(0, 0.3, 0.1, 0.1));
-	}
+
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	glPopMatrix();
 
