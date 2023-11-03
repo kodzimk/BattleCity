@@ -29,9 +29,9 @@ int main(void)
         return -1;
     
     float trianlgr[] = {
-        0,0.5 ,
-        0.5,0.5,
-        0.5,0,
+        0,0.1 ,
+        0.1,0.1,
+        0.1,0,
         0,0
     };
 
@@ -57,7 +57,7 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
     
         map.render(trianlgr);
-        player.render(trianlgr,window,map.checkCollision(player.x,player.y,0.15,0.15));     
+        player.render(trianlgr,window,map.checkCollision(player.x,player.y,0.1,0.1));     
         enemyies.render(window, trianlgr,true);
 
      

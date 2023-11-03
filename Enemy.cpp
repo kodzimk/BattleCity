@@ -44,7 +44,6 @@ Enemy::~Enemy()
 void Enemy::render(GLFWwindow* window,float vertex[],bool isCan)
 {
 	glPushMatrix();
-	glScalef(0.3, 0.3, 1);
 	this->move(isCan);
 	this->animations(window,isCan);
 

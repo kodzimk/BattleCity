@@ -24,8 +24,8 @@ Player::Player()
 
 	this->currentSide = 0.0;
 	this->sideToMove = 0;
-	this->x = 0.f;
-	this->y = 0.f;
+	this->x = -0.17f;
+	this->y = 0.1f;
 }
 
 Player::~Player()
@@ -39,7 +39,6 @@ void Player::render(float vertex[],GLFWwindow* window,bool isCan)
 	this->Move(window,isCan);
 	this->animations(window);
 
-	glScalef(0.3, 0.3, 1);
 	glEnable(GL_TEXTURE_2D);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -57,19 +56,19 @@ void Player::Move(GLFWwindow* window,bool isCan)
 {
 	if (glfwGetKey(window,GLFW_KEY_W)>0&& sideToMove==0&&isCan)
 	{
-	     	y -= 0.001;
+	     	y -= 0.0002;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_S) > 0 && sideToMove == 2&& isCan)
 	{
-			y += 0.001;
+			y += 0.0002;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_A) > 0 && sideToMove == 1&&  isCan)
 	{
-	        x += 0.001;		
+	        x += 0.0002;		
 	}
 	else if (glfwGetKey(window, GLFW_KEY_D) > 0 && sideToMove == 3&& isCan)
 	{
-			x -= 0.001;
+			x -= 0.0002;
 	}
 
 
