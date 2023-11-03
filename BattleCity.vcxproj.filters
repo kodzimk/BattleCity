@@ -25,6 +25,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -34,6 +37,9 @@
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>

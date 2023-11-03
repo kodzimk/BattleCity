@@ -1,5 +1,6 @@
 #include"Map.h"
 #include"Player.h"
+#include"Enemy.h"
 #include<iostream>
 
 int g_windowSizeX = 640;
@@ -45,7 +46,10 @@ int main(void)
 
     Map map;
     Player player;
-
+    Enemy enemyies(0);
+ 
+ 
+    
 
     while (!glfwWindowShouldClose(window))
     {
@@ -53,7 +57,9 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
     
         map.render(trianlgr);
-        player.render(trianlgr,window);
+        player.render(trianlgr,window,map.checkCollision(player.x,player.y,0.15,0.15));     
+        enemyies.render(window, trianlgr,true);
+
      
         glfwSwapBuffers(window);
 

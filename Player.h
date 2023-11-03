@@ -17,7 +17,7 @@ public:
 	Player();
 	~Player();
 
-	void render(float vertex[],GLFWwindow* window);
+	void render(float vertex[],GLFWwindow* window,bool isCan);
 	void Move(GLFWwindow* window,bool isCan);
 	void animations(GLFWwindow* window);
 };

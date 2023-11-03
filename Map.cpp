@@ -29,11 +29,15 @@ Map::Map()
 			
 	texCoord2[6] = 0;
 	texCoord2[7] = 0.2;
+	this->counts = 0;
 }
 
 Map::~Map()
 {
-
+	for (int i = 0; i < this->positions.size(); i++)
+	{
+		delete this->positions[i];
+	}
 }
 
 void Map::render(float vertex[])
@@ -70,38 +74,78 @@ void Map::render(float vertex[])
 			if (j == 0)
 			{
 				glTranslatef(-4, i * 0.5, 0);
+				if (counts < 40)
+				{
+					counts++;
+					this->positions.push_back(new pos(-4, i*0.5));
+				}
 			}
 
 			if (j == 1)
 			{
 				glTranslatef(-2.5, i * 0.5, 0);
+				if (counts < 40)
+				{
+					counts++;
+					this->positions.push_back(new pos(-2.5, i*0.5));
+				}
 			}
 
 			if (j == 2&&i!=0)
 			{
 				glTranslatef(-1, i * 0.5, 0);
+				if (counts < 40)
+				{
+					counts++;
+					this->positions.push_back(new pos(-1, i*0.5));
+				}
 			}
 			else if(j==2&&i==0)
 			{
-				glTranslatef(-1,  -1.5, 0);;
+				glTranslatef(-1,  -1.5, 0);
+				if (counts < 40)
+				{
+					counts++;
+					this->positions.push_back(new pos(-1, -1.5));
+				}
 			}
 
 			if (j == 3&&i!=0)
 			{
 				glTranslatef(0.5, i * 0.5, 0);
+				if (counts < 40)
+				{
+					counts++;
+					this->positions.push_back(new pos(0.5, i*0.5));
+				}
 			}
 			else if (j == 3 && i == 0)
 			{
-				glTranslatef(-0.5, -0.5, 0);;
+				glTranslatef(-0.5, -0.5, 0);
+				if (counts < 40)
+				{
+					counts++;
+					this->positions.push_back(new pos(-0.5, -0.5));
+				}
 			}
 
 			if (j == 4)
 			{
 				glTranslatef(2, i * 0.5, 0);
+				if (counts < 40)
+				{
+					counts++;
+					this->positions.push_back(new pos(2, i*0.5));
+				}
 			}
 			if (j == 5)
 			{
 				glTranslatef(3.5, i * 0.5, 0);
+				if (counts < 40)
+				{
+					counts++;
+					this->positions.push_back(new pos(3.5, i*0.5));
+				}
 			}
 
 
@@ -323,4 +367,16 @@ void Map::render(float vertex[])
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glPopMatrix();
+}
+
+bool Map::checkCollision(float x, float y, float sizeX,float sizeY)
+{
+	for (int i = 0; i < this->positions.size(); i++)
+	{
+		if (this->positions[i]->x == x + sizeX && this->positions[i]->y == y + sizeY)
+		{
+			return false;
+		}
+	}
+	return true;
 }

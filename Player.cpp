@@ -32,11 +32,11 @@ Player::~Player()
 {
 }
 
-void Player::render(float vertex[],GLFWwindow* window)
+void Player::render(float vertex[],GLFWwindow* window,bool isCan)
 {
 
 	glPushMatrix();
-	this->Move(window,true);
+	this->Move(window,isCan);
 	this->animations(window);
 
 	glScalef(0.3, 0.3, 1);
@@ -55,12 +55,25 @@ void Player::render(float vertex[],GLFWwindow* window)
 
 void Player::Move(GLFWwindow* window,bool isCan)
 {
-	if (glfwGetKey(window,GLFW_KEY_W)>0&& sideToMove == 0&&isCan)
+	if (glfwGetKey(window,GLFW_KEY_W)>0&& sideToMove==0&&isCan)
 	{
-		y += 0.01;
+	     	y -= 0.001;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_S) > 0 && sideToMove == 2&& isCan)
+	{
+			y += 0.001;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_A) > 0 && sideToMove == 1&&  isCan)
+	{
+	        x += 0.001;		
+	}
+	else if (glfwGetKey(window, GLFW_KEY_D) > 0 && sideToMove == 3&& isCan)
+	{
+			x -= 0.001;
 	}
 
-	glTranslatef(y, x, 0);
+
+	glTranslatef(-x, -y, 0);
 }
 
 void Player::animations(GLFWwindow* window)
@@ -82,7 +95,7 @@ void Player::animations(GLFWwindow* window)
 
 			texCoord[6] = 0;
 			texCoord[7] = 0.9375;
-
+			sideToMove = 0;
 		}
 
 		if (floor(currentSide) == 2)
@@ -98,7 +111,7 @@ void Player::animations(GLFWwindow* window)
 
 			texCoord[6] = 0.375;
 			texCoord[7] = 0.9375;
-
+			sideToMove = 3;
 		}
 
 		if (floor(currentSide) == 3)
@@ -114,6 +127,7 @@ void Player::animations(GLFWwindow* window)
 
 			texCoord[6] = 0.25;
 			texCoord[7] = 0.9375;
+			sideToMove = 2;
 		}
 
 
@@ -131,10 +145,11 @@ void Player::animations(GLFWwindow* window)
 			texCoord[6] = 0.125;
 			texCoord[7] = 0.9375;
 			currentSide = 0;
+			sideToMove = 1;
 		}
-		return;
+		
 	}
-	if (glfwGetKey(window, GLFW_KEY_LEFT) > 0)
+	else if (glfwGetKey(window, GLFW_KEY_LEFT) > 0)
 	{
 		currentSide += 0.004;
 
@@ -151,6 +166,7 @@ void Player::animations(GLFWwindow* window)
 
 			texCoord[6] = 0.125;
 			texCoord[7] = 0.9375;
+			sideToMove = 1;
 		}
 
 		if (floor(currentSide) == 2)
@@ -166,6 +182,7 @@ void Player::animations(GLFWwindow* window)
 
 			texCoord[6] = 0.25;
 			texCoord[7] = 0.9375;
+			sideToMove = 2;
 		}
 
 		if (floor(currentSide) == 3)
@@ -181,6 +198,7 @@ void Player::animations(GLFWwindow* window)
 
 			texCoord[6] = 0.375;
 			texCoord[7] = 0.9375;
+			sideToMove = 3;
 		}
 
 
@@ -198,6 +216,7 @@ void Player::animations(GLFWwindow* window)
 			texCoord[6] = 0;
 			texCoord[7] = 0.9375;
 			currentSide = 0;
+			sideToMove = 0;
 		}
 
 		std::cout << currentSide << std::endl;
