@@ -71,6 +71,26 @@ void Player::Move(GLFWwindow* window,bool isCan)
 			x -= 0.0002;
 	}
 
+	if (!isCan)
+	{
+		if (sideToMove == 0)
+		{
+			y+= 0.02;
+		}
+		if (sideToMove == 2)
+		{
+			y -= 0.02;
+		}
+		if (sideToMove == 1)
+		{
+			x -= 0.02;
+		}
+		if (sideToMove == 3)
+		{
+			x += 0.02;
+		}
+	}
+
 
 	glTranslatef(-x, -y, 0);
 }

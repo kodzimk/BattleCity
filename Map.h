@@ -7,12 +7,19 @@
 class pos
 {
 public:
-	float x, y;
+	float x, y,width,heigbt;
 
-	pos(float x, float y)
+	pos(float x, float y,float widt,float height)
 	{
 		this->x = x;
 		this->y = y;
+		this->width = widt;
+		this->heigbt = height;
+	}
+
+	pos()
+	{
+
 	}
 };
 
@@ -30,7 +37,6 @@ public:
 	~Map();
 
 	void render(float vertex[]);
-	bool checkCollision(float x, float y,float size,float sizeY);
+	bool checkCollision(float x, float y, float width, float height, float width2, float height2);
 };
-
 #endif

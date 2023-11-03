@@ -6,6 +6,38 @@
 int g_windowSizeX = 640;
 int g_windowSizeY = 480;
 
+struct posi {
+    float x, y;
+}pos = { 0.5,0.5 };
+
+
+bool functions(float x, float y, float width, float height,float x2,float y2,float width2,float height2)
+{
+    posi box1right;
+    box1right.x = x;
+    box1right.y = y;
+    posi box1left;
+     box1left.x = x + width;
+     box1left.y = y + height ;
+
+     posi box2left;
+     posi box2right;
+     box2right.x = x2;
+     box2right.y = y2;
+    box2left.x = x2 + width2;
+    box2left.y = y2 + height2;
+
+    if (box2right.x <= box1left.x &&
+        box2left.x >= box1right.x &&
+        box2right.y <= box1left.y &&
+        box2left.y >= box1right.y)
+    {
+        std::cout << "nIGER";
+        return false;
+    }
+    return true;
+}
+
 int main(void)
 {
     GLFWwindow* window;
@@ -46,20 +78,19 @@ int main(void)
 
     Map map;
     Player player;
-    Enemy enemyies(0);
- 
- 
-    
+    Enemy enemy(0);
 
     while (!glfwWindowShouldClose(window))
     {
-        
         glClear(GL_COLOR_BUFFER_BIT);
-    
-        map.render(trianlgr);
-        player.render(trianlgr,window,map.checkCollision(player.x,player.y,0.1,0.1));     
-        enemyies.render(window, trianlgr,true);
 
+
+
+        map.render(trianlgr);
+        enemy.render(window, trianlgr, map.checkCollision(-enemy.x, -enemy.y, 0.1, 0.1, 0.1, 0.1));
+        player.render(trianlgr, window, map.checkCollision(-player.x, -player.y, 0.1, 0.1, 0.1, 0.1));
+
+        
      
         glfwSwapBuffers(window);
 

@@ -21,14 +21,9 @@ Enemy::Enemy(int i)
 
 	if (i == 0)
 	{
-		x = 3.3;
+		x = 0.95;
 		y = 0.2;
 
-	}
-	if (i == 1)
-	{
-		x = -3.3;
-		y = 0.2;
 	}
 }
 
@@ -64,19 +59,22 @@ void Enemy::move(bool isCan)
 {
 	if (sideToMove == 0 && isCan)
 	{
-		y -= 0.001;
+		x -= 0.0001;
 	}
+
 	if (sideToMove == 2 && isCan)
 	{
-		y += 0.001;
+		y += 0.0001;
 	}
+
 	if (sideToMove == 1 && isCan)
 	{
-		x += 0.001;
+		y -= 0.0001;
 	}
+
 	if (sideToMove == 3 && isCan)
 	{
-		x -= 0.001;
+		x -= 0.0001;
 	}
 
 	glTranslatef(-x, -y, 0);
@@ -84,9 +82,61 @@ void Enemy::move(bool isCan)
 
 void Enemy::animations(GLFWwindow* window,bool isCan)
 {
+	if (-x >= 0.85)
+	{
+		texCoord[0] = 0.6250;
+		texCoord[1] = 1;
+
+		texCoord[2] = 0.6875;
+		texCoord[3] = 1;
+
+		texCoord[4] = 0.6875;
+		texCoord[5] = 0.9375;
+
+		texCoord[6] = 0.635;
+		texCoord[7] = 0.9375;
+		sideToMove = 2;
+	}
+
+    if (-y <= -0.75)
+    {
+    	texCoord[0] = 0.8750;
+    	texCoord[1] = 1;
+    
+    	texCoord[2] = 0.9375;
+    	texCoord[3] = 1;
+    
+    	texCoord[4] = 0.9375;
+    	texCoord[5] = 0.9375;
+    
+    	texCoord[6] = 0.8750;
+    	texCoord[7] = 0.9375;
+    
+    	sideToMove = 3;
+    }
+	if (-y >=0.75)
+	{
+		texCoord[0] = 0.8750;
+		texCoord[1] = 1;
+
+		texCoord[2] = 0.9375;
+		texCoord[3] = 1;
+
+		texCoord[4] = 0.9375;
+		texCoord[5] = 0.9375;
+
+		texCoord[6] = 0.8750;
+		texCoord[7] = 0.9375;
+
+		sideToMove = 3;
+	}
+
+
+
+
 	if (!isCan)
 	{
-		if (sideToMove == 0)
+		if (sideToMove == 0)//right
 		{
 			texCoord[0] = 0.8750;
 			texCoord[1] = 1;
@@ -99,9 +149,10 @@ void Enemy::animations(GLFWwindow* window,bool isCan)
 
 			texCoord[6] = 0.8750;
 			texCoord[7] = 0.9375;
+			
 			sideToMove = 3;
 		}
-		if (sideToMove == 1)
+		if (sideToMove == 1)//down
 		{
 			texCoord[0] = 0.75;
 			texCoord[1] = 1;
@@ -114,25 +165,13 @@ void Enemy::animations(GLFWwindow* window,bool isCan)
 
 			texCoord[6] = 0.75;
 			texCoord[7] = 0.9375;
+
+			y -= 0.002;
 			sideToMove = 2;
 		}
-		if (sideToMove == 2)
+		if (sideToMove == 2)//up
 		{
-			texCoord[0] = 0.6250;
-			texCoord[1] = 1;
 
-			texCoord[2] = 0.6875;
-			texCoord[3] = 1;
-
-			texCoord[4] = 0.6875;
-			texCoord[5] = 0.9375;
-
-			texCoord[6] = 0.635;
-			texCoord[7] = 0.9375;
-			sideToMove = 1;
-		}
-		if (sideToMove == 3)
-		{
 			texCoord[0] = 0.5;
 			texCoord[1] = 1;
 
@@ -145,6 +184,22 @@ void Enemy::animations(GLFWwindow* window,bool isCan)
 			texCoord[6] = 0.5;
 			texCoord[7] = 0.9375;
 			sideToMove = 1;
+		}
+		if (sideToMove == 3)//left
+		{
+			texCoord[0] = 0.625;
+			texCoord[1] = 1;
+
+			texCoord[2] = 0.6875;
+			texCoord[3] = 1;
+
+			texCoord[4] = 0.6875;
+			texCoord[5] = 0.9375;
+
+			texCoord[6] = 0.625;
+			texCoord[7] = 0.9375;
+
+			sideToMove = 0;
 		}
 
 	}
